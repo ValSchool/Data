@@ -1,0 +1,13 @@
+Route::get('/', function () {
+return [
+"Uranus",
+"Jupiter",
+"Mars",
+"Earth",
+"Saturn",
+"Pluto",
+"Neptune",
+"Venus",
+
+];
+));
