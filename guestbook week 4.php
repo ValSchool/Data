@@ -7,6 +7,8 @@ $password = "";
 $db = "leaky_guest_book";
 $conn;
 
+
+
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
 } catch (Exception $e) {
@@ -19,6 +21,7 @@ if (empty($_SESSION['token'])) {
 $token = $_SESSION['token'];
 
 ?>
+
 <html>
 <head>
     <title>Guestbook</title>
@@ -27,6 +30,7 @@ body {
 width: 100%;
 }
 
+        
 .body-container {
 background-color: aliceblue;
 width: 200px;
@@ -37,6 +41,7 @@ padding-right: 100px;
 padding-bottom: 20px;
         }
 
+        
         .heading {
             text-align: center;
         }
@@ -63,6 +68,7 @@ padding-bottom: 20px;
     <?php
     $email = isset($_POST['email']) ? $_POST['email'] : "";
 
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $emailErr = "Invalid email format";
         echo "<h1 style='color:red;'>" . $emailErr . "</h1>";
@@ -70,13 +76,18 @@ padding-bottom: 20px;
         $email = $_POST['email'];
         $text = $_POST['text'];
         $admin = isset($_POST['admin']) ? 1 : 0;
+        
         $color = "red";
+    
 
+
+        
         $conn->query(
             "INSERT INTO `entries`(`email`, `color`, `admin`, `text`)
                              VALUES ('$email', '$color', '$admin', '$text');"
         );
     }
+
 
     $result = $conn->query("SELECT `email`, `text`, `color`, `admin` FROM `entries`");
     foreach ($result as $row) {
@@ -86,6 +97,7 @@ padding-bottom: 20px;
         }
         print ": " . htmlspecialchars($row['text'], ENT_QUOTES, 'UTF-8') . "</div><br/>";
     }
+
 
     function userIsAdmin($conn)
     {
@@ -101,11 +113,11 @@ padding-bottom: 20px;
         }
         return false;
     }
-
     ?>
     <hr/>
     <div class="disclosure-notice">
         <p>
+            
             Hierbij krijgt iedereen expliciete toestemming om dit Gastenboek zelf te gebruiken voor welke doeleinden dan
             ook.
         </p>
@@ -117,5 +129,6 @@ padding-bottom: 20px;
         </p>
     </div>
 </div>
+    
 </body>
 </html>
