@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PlanetController extends Controller
+{
+    public function index()
+    {
+    }
+    public function show($planet)
+    {
+    }
+}
+use Illuminate\Support\Facades\Route;
+
+Route::get('/planets', 'PlanetController@index');
+Route::get('/planets/{planet}', 'PlanetController@show');
+
+<?php
