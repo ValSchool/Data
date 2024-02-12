@@ -16,14 +16,6 @@ class DB {
     public function crud($sql, $params = []) {
         $this->stmt = $this->dbh->prepare($sql);
         $this->stmt->execute($params);
-
-        if (strpos(strtolower($sql), 'select') === 0) {
-            return $this->stmt->fetchAll();
-        } elseif (strpos(strtolower($sql), 'insert') === 0) {
-            return $this->dbh->lastInsertId();
-        } elseif (strpos(strtolower($sql), 'update') === 0 || strpos(strtolower($sql), 'delete') === 0) {
-            return $this->stmt->rowCount();
-        }
     }
 }
 
